@@ -1,1 +1,18 @@
+import streamlit as st
+import pandas as pd
 
+# 載入您的檔案
+df = pd.read_excel('場地出借資訊115年_2.xlsx')
+
+st.title('台中市各區場地出借查詢系統')
+
+# 讓使用者選擇行政區
+districts = df['行政區'].unique()
+selected_district = st.selectbox('請選擇行政區：', districts)
+
+# 根據選擇篩選資料
+filtered_df = df[df['行政區'] == selected_district]
+
+# 顯示篩選結果
+st.write(f'### {selected_district} 的場地資訊')
+st.dataframe(filtered_df) # 顯示互動表格
